@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "projects": {
+    "overpass-osm-api": {
+      "type": "library",
+      "root": "libs/overpass-osm-api",
+      "entryFile": "index",
+      "sourceRoot": "libs/overpass-osm-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/overpass-osm-api/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}

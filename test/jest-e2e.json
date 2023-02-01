@@ -1,0 +1,17 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "mugan86-osm-api/overpass-osm-api/(.*)": "<rootDir>/../libs/overpass-osm-api/src/$1",
+    "mugan86-osm-api/overpass-osm-api": "<rootDir>/../libs/overpass-osm-api/src"
+  }
+}

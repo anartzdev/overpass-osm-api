@@ -1,0 +1,17 @@
+{
+  "name": "@mugan86/overpass-osm-api",
+  "version": "0.0.1",
+  "description": "NestJS Library that use to consume Open Street Map info with use Overpass API",
+  "main": "index.js",
+  "keywords": ["nestjs", "osm", "openstreetmap"],
+  "author": {
+    "name": "Anartz Mugika Ledo",
+    "email": "mugan86@gmail.com",
+    "url": "https://mugan86.medium.com/"
+  },
+  "license": "MIT", 
+  "peerDependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0"
+  }
+}
