@@ -17,6 +17,14 @@ export class AppController {
   // '43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266'
   @Post()
   async getZoneDrinkPeaks(@Body() body): Promise<string> {
+    if (body.search) {
+      await this.osmService.getLocationBySearch(body.search);
+    }
     return await this.osmService.getBoundsDrinkWatersPeaks(body.bbox);
+  }
+
+  @Get('/area')
+  async getArea(): Promise<string> {
+    return await this.osmService.getLocationBySearch("Soraluze");
   }
 }
