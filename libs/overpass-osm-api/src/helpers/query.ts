@@ -4,6 +4,7 @@ export const createQueryInfo = (queryParams: {
   bbox: string;
   outputFormat: string;
   timeOutInSeconds: number;
+  filters?: Array<string>;
 }) => {
   if (!queryParams.bbox) {
     throw new Error(`
@@ -26,12 +27,24 @@ export const createQueryInfo = (queryParams: {
     [bbox:${queryParams.bbox}][out:${outputDataFormat}][timeout:${queryTimeLimit}];
     (`;
 
-  const filters = `
-    node["natural"="peak"];
-    node["amenity"="drinking_water"];
-    node["natural"="spring"];
-    node["drinking_water"="yes"];
-    `;
+  let filters = ``;
+  if (!queryParams.filters || !queryParams.filters.length) {
+    filters = `
+      node["natural"="peak"];
+      node["amenity"="drinking_water"];
+      node["natural"="spring"];
+      node["drinking_water"="yes"];
+      `;
+  } else {
+    filters = `
+      `;
+    queryParams.filters.map((filter) => {
+      filters += `node[${filter}]; `;
+    });
+    filters += `
+      `;
+  }
+
   const outBody = `
     );
     out body;
