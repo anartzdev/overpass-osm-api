@@ -8,7 +8,7 @@ export class OverpassOsmApiController {
   // '43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266'
   @Post()
   async getZoneMapFeatures(
-    @Body() body: { bbox?: string; search?: string, filters?: Array<string> }
+    @Body() body: { bbox?: string; search?: string; filters?: Array<string> },
   ): Promise<string> {
     console.log(body);
     // Add manually filters
@@ -19,11 +19,14 @@ export class OverpassOsmApiController {
     if (body.search && (!body.bbox || !body.bbox.length)) {
       return await this.osmService.getBoundaryBoundsMapFeatures(
         await this.osmService.getLocationBySearch(body.search),
-        filters
+        filters,
       );
     }
     // "bbox": "43.2954421,-2.7176555,43.3274464,-2.6658945",
-    return await this.osmService.getBoundaryBoundsMapFeatures(body.bbox, filters);
+    return await this.osmService.getBoundaryBoundsMapFeatures(
+      body.bbox,
+      filters,
+    );
   }
 
   @Get('/area/:search')
@@ -37,9 +40,7 @@ export class OverpassOsmApiController {
   @Get('/help')
   getHelp() {
     return {
-        "intro": "Instrucciones de "
-    }
+      intro: 'Instrucciones de ',
+    };
   }
 }
-
-

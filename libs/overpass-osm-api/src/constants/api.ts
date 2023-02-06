@@ -9,9 +9,9 @@ export const OUTPUT_FORMAT = {
 };
 
 export const INSTRUCTIONS_HELP = {
-  "intro": "Instrucciones de ",
-  "find": {
-    "byArea": "",
-    "byBoundaryBox": ""
-  }
-}
+  intro: 'Instrucciones de ',
+  find: {
+    byArea: '',
+    byBoundaryBox: '',
+  },
+};

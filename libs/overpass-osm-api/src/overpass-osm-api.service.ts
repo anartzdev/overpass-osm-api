@@ -14,7 +14,10 @@ export class OverpassOsmApiService {
    * @param bbox Geographic zone boundary limits. Need two points. For example north east and just in diagonal south west
    * @returns
    */
-  async getBoundaryBoundsMapFeatures(bbox: string, filters: Array<string> = []) {
+  async getBoundaryBoundsMapFeatures(
+    bbox: string,
+    filters: Array<string> = [],
+  ) {
     const overpassQuery = createQueryInfo({
       bbox,
       outputFormat: OUTPUT_FORMAT.JSON,
