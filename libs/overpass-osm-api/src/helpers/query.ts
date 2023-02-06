@@ -30,7 +30,6 @@ export const createQueryInfo = (queryParams: {
   let filters = ``;
   if (!queryParams.filters || !queryParams.filters.length) {
     filters = `
-      node["natural"="peak"];
       node["amenity"="drinking_water"];
       node["natural"="spring"];
       node["drinking_water"="yes"];

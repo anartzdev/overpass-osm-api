@@ -7,3 +7,11 @@ export const OUTPUT_FORMAT = {
   JSON: 'json',
   XML: 'xml',
 };
+
+export const INSTRUCTIONS_HELP = {
+  "intro": "Instrucciones de ",
+  "find": {
+    "byArea": "",
+    "byBoundaryBox": ""
+  }
+}

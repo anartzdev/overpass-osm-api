@@ -14,15 +14,15 @@ export class OverpassOsmApiService {
    * @param bbox Geographic zone boundary limits. Need two points. For example north east and just in diagonal south west
    * @returns
    */
-  async getBoundsDrinkWatersPeaks(bbox: string, filters: Array<string> = []) {
+  async getBoundaryBoundsMapFeatures(bbox: string, filters: Array<string> = []) {
     const overpassQuery = createQueryInfo({
       bbox,
       outputFormat: OUTPUT_FORMAT.JSON,
       timeOutInSeconds: 50,
-      filters
+      filters,
     });
 
-    console.log(overpassQuery)
+    console.log(overpassQuery);
 
     try {
       const res = await axios.post(OVERPASS_API, overpassQuery);
@@ -38,7 +38,7 @@ export class OverpassOsmApiService {
    * @param boundingbox [south, north, west, east]
    * @returns string 'south,west,north,east'
    */
-  async getLocationBoundaryBox(boundingbox: Array<string>) {
+  private async getLocationBoundaryBox(boundingbox: Array<string>) {
     // Convert [south, north, west, east] => [south,west,north,east]
     const temp = boundingbox[1];
     boundingbox[1] = boundingbox[2];
