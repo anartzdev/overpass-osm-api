@@ -25,6 +25,7 @@ Obtenemos los servicios de la API Open Street Map con los datos de los filtros q
 
 Los datos que se podrán enviar serán:
 
+**http://localhost:3000/osm-api**
 `
 {
     "search": "Eibar"
@@ -54,3 +55,16 @@ Especificando los límites de la zona con bbox: 43.1640982,-2.4996626,43.2258879
    "bbox": "43.1640982,-2.4996626,43.2258879,-2.4323883",
     "filters": ["amenity=bar", "amenity=restaurant", "tourism=hotel"]
 }`
+
+**http://localhost:3000/osm-api/area/<LUGAR>**
+
+Por ejemplo:
+http://localhost:3000/osm-api/area/medina+de+pomar
+
+Obtenemos la información de los límites geográficos de Medina de Pomar (Burgos) devolviendo lo siguiente:
+
+`43.1640982,-2.4996626,43.2258879,-2.4323883`
+
+¿Qué será esto? El recuadro de los límites de la zona en la que queremos hacer una búsqueda.
+
+

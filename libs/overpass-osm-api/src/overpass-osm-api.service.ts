@@ -10,7 +10,7 @@ import { createQueryInfo } from './helpers/query';
 @Injectable()
 export class OverpassOsmApiService {
   /**
-   *
+   * Get select filter and add boundary box section all map features
    * @param bbox Geographic zone boundary limits. Need two points. For example north east and just in diagonal south west
    * @returns
    */
@@ -25,7 +25,7 @@ export class OverpassOsmApiService {
       filters,
     });
 
-    console.log(overpassQuery);
+    Logger.log(`Query:\n ${overpassQuery}`);
 
     try {
       const res = await axios.post(OVERPASS_API, overpassQuery);
@@ -49,6 +49,11 @@ export class OverpassOsmApiService {
     return boundingbox.join(',');
   }
 
+  /**
+   * Obtain boundary box limits from specific zone that uknown boundary box limits data
+   * @param searchTerm name of town, area, province,...
+   * @returns boundary box limits
+   */
   async getLocationBySearch(searchTerm: string) {
     try {
       Logger.log(`Take data from: ${NOMINATIM_OSM_API}${searchTerm}`);

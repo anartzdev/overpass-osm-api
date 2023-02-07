@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Logger } from '@nestjs/common';
+import { FEATURES } from './constants/map-features';
 import { OverpassOsmApiService } from './overpass-osm-api.service';
 
 @Controller('osm-api')
@@ -10,12 +11,11 @@ export class OverpassOsmApiController {
   async getZoneMapFeatures(
     @Body() body: { bbox?: string; search?: string; filters?: Array<string> },
   ): Promise<string> {
-    console.log(body);
+    Logger.log(`Input data : ${body}`);
     // Add manually filters
     // TODO take filters keys to generate values from constants
     // const filters = ['amenity=bar', 'amenity=restaurant', 'tourism=hotel'];
     const filters = body.filters || [];
-    console.log(filters);
     if (body.search && (!body.bbox || !body.bbox.length)) {
       return await this.osmService.getBoundaryBoundsMapFeatures(
         await this.osmService.getLocationBySearch(body.search),
@@ -37,10 +37,21 @@ export class OverpassOsmApiController {
     return await this.osmService.getLocationBySearch(searchArea);
   }
 
-  @Get('/help')
-  getHelp() {
-    return {
-      intro: 'Instrucciones de ',
-    };
+  @Get('/help/:language')
+  getHelp(@Param('language') language: string = 'es') {
+    return FEATURES.map((feature) => {
+      return {
+        type: feature.key,
+        filterValues: [
+          ...(feature.value1 !== '') ? [feature.value1] : [],
+          ...(feature.value2 !== '') ? [feature.value2] : [],
+          ...(feature.value3 !== '') ? [feature.value3] : [],
+          ...(feature.value4 !== '') ? [feature.value4] : [],
+          ...(feature.value5 !== '') ? [feature.value5] : []
+        ],
+        description: language === 'es' ? feature.description_es : feature.description_en,
+        url: feature.info
+      }
+    });
   }
 }
