@@ -9,7 +9,7 @@ export class OverpassOsmApiController {
   // '43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266'
   @Post()
   async getZoneMapFeatures(
-    @Body() body: { bbox?: string; search?: string; filters?: Array<string> },
+    @Body() body: { bbox?: string; search?: string; filters?: Array<string> }
   ): Promise<string> {
     Logger.log(`Input data : ${body}`);
     // Add manually filters
@@ -19,13 +19,12 @@ export class OverpassOsmApiController {
     if (body.search && (!body.bbox || !body.bbox.length)) {
       return await this.osmService.getBoundaryBoundsMapFeatures(
         await this.osmService.getLocationBySearch(body.search),
-        filters,
+        filters
       );
     }
-    // "bbox": "43.2954421,-2.7176555,43.3274464,-2.6658945",
     return await this.osmService.getBoundaryBoundsMapFeatures(
       body.bbox,
-      filters,
+      filters
     );
   }
 
@@ -38,20 +37,21 @@ export class OverpassOsmApiController {
   }
 
   @Get('/help/:language')
-  getHelp(@Param('language') language: string = 'es') {
+  getHelp(@Param('language') language = 'es') {
     return FEATURES.map((feature) => {
       return {
         type: feature.key,
         filterValues: [
-          ...(feature.value1 !== '') ? [feature.value1] : [],
-          ...(feature.value2 !== '') ? [feature.value2] : [],
-          ...(feature.value3 !== '') ? [feature.value3] : [],
-          ...(feature.value4 !== '') ? [feature.value4] : [],
-          ...(feature.value5 !== '') ? [feature.value5] : []
+          ...(feature.value1 !== '' ? [feature.value1] : []),
+          ...(feature.value2 !== '' ? [feature.value2] : []),
+          ...(feature.value3 !== '' ? [feature.value3] : []),
+          ...(feature.value4 !== '' ? [feature.value4] : []),
+          ...(feature.value5 !== '' ? [feature.value5] : []),
         ],
-        description: language === 'es' ? feature.description_es : feature.description_en,
-        url: feature.info
-      }
+        description:
+          language === 'es' ? feature.description_es : feature.description_en,
+        url: feature.info,
+      };
     });
   }
 }
