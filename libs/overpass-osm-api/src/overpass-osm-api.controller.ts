@@ -11,10 +11,11 @@ export class OverpassOsmApiController {
   // '43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266'
   @Post()
   @ApiBody({ type: CreateSearchApiDto })
-  @ApiOperation({ summary: 'Get OSM map objects with select Boundary Box / Area and apply desire filters' })
-  async getZoneMapFeatures(
-    @Body() body: CreateSearchApiDto,
-  ): Promise<string> {
+  @ApiOperation({
+    summary:
+      'Get OSM map objects with select Boundary Box / Area and apply desire filters',
+  })
+  async getZoneMapFeatures(@Body() body: CreateSearchApiDto): Promise<string> {
     Logger.log(`Input data : ${body}`);
     // Add manually filters
     // TODO take filters keys to generate values from constants
@@ -59,7 +60,10 @@ export class OverpassOsmApiController {
     });
   }
 }
-function ApiResponseModelProperty(arg0: { type: any; isArray: any; example: any; }) {
+function ApiResponseModelProperty(arg0: {
+  type: any;
+  isArray: any;
+  example: any;
+}) {
   throw new Error('Function not implemented.');
 }
-

@@ -9,7 +9,7 @@ async function bootstrap() {
     .setContact(
       'Anartz Mugika',
       'https://anartz-mugika.com/',
-      'mugan86@gmail.com'
+      'mugan86@gmail.com',
     )
     .setTitle('OSM with Overpass Turbo')
     .setDescription('Open Street Map API with Overpass Query language')
