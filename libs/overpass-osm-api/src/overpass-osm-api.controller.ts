@@ -1,5 +1,7 @@
 import { Controller, Post, Body, Get, Param, Logger } from '@nestjs/common';
+import { ApiBody, ApiOperation } from '@nestjs/swagger';
 import { FEATURES } from './constants/map-features';
+import { CreateSearchApiDto } from './overpass-osm-api.dto';
 import { OverpassOsmApiService } from './overpass-osm-api.service';
 
 @Controller('osm-api')
@@ -8,8 +10,10 @@ export class OverpassOsmApiController {
 
   // '43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266'
   @Post()
+  @ApiBody({ type: CreateSearchApiDto })
+  @ApiOperation({ summary: 'Get OSM map objects with select Boundary Box / Area and apply desire filters' })
   async getZoneMapFeatures(
-    @Body() body: { bbox?: string; search?: string; filters?: Array<string> }
+    @Body() body: CreateSearchApiDto,
   ): Promise<string> {
     Logger.log(`Input data : ${body}`);
     // Add manually filters
@@ -19,12 +23,12 @@ export class OverpassOsmApiController {
     if (body.search && (!body.bbox || !body.bbox.length)) {
       return await this.osmService.getBoundaryBoundsMapFeatures(
         await this.osmService.getLocationBySearch(body.search),
-        filters
+        filters,
       );
     }
     return await this.osmService.getBoundaryBoundsMapFeatures(
       body.bbox,
-      filters
+      filters,
     );
   }
 
@@ -37,7 +41,7 @@ export class OverpassOsmApiController {
   }
 
   @Get('/help/:language')
-  getHelp(@Param('language') language = 'es') {
+  getHelp(@Param('language') language) {
     return FEATURES.map((feature) => {
       return {
         type: feature.key,
@@ -55,3 +59,7 @@ export class OverpassOsmApiController {
     });
   }
 }
+function ApiResponseModelProperty(arg0: { type: any; isArray: any; example: any; }) {
+  throw new Error('Function not implemented.');
+}
+
