@@ -14,6 +14,25 @@ export class OverpassOsmApiController {
   @ApiOperation({
     summary:
       'Get OSM map objects with select Boundary Box / Area and apply desire filters',
+      description: `
+      Examples to make correctly requests:
+      ======================================
+      Boundary Box Uknown, for example Madrid is area.
+
+      {
+        "search": "Madrid",
+        "filters": ["atm=yes",
+                "amenity=atm"]
+      }
+
+      ======================================
+      With Boundary Box (Madrid):
+      {
+        "bbox": "40.3119774,-3.8889539,40.6437293,-3.5179163",
+        "filters": ["atm=yes",
+                "amenity=atm"]
+      }
+      `,
   })
   async getZoneMapFeatures(@Body() body: CreateSearchApiDto): Promise<string> {
     Logger.log(`Input data : ${body}`);
@@ -42,7 +61,7 @@ export class OverpassOsmApiController {
   }
 
   @Get('/help/:language')
-  getHelp(@Param('language') language) {
+  getHelp(@Param('language') selectLanguage): { type: string; filterValues: string[]; description: string; url: string; }[] {
     return FEATURES.map((feature) => {
       return {
         type: feature.key,
@@ -54,16 +73,9 @@ export class OverpassOsmApiController {
           ...(feature.value5 !== '' ? [feature.value5] : []),
         ],
         description:
-          language === 'es' ? feature.description_es : feature.description_en,
+        selectLanguage === 'es' ? feature.description_es : feature.description_en,
         url: feature.info,
       };
     });
   }
-}
-function ApiResponseModelProperty(arg0: {
-  type: any;
-  isArray: any;
-  example: any;
-}) {
-  throw new Error('Function not implemented.');
 }
