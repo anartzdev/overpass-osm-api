@@ -14,7 +14,7 @@ export class OverpassOsmApiController {
   @ApiOperation({
     summary:
       'Get OSM map objects with select Boundary Box / Area and apply desire filters',
-      description: `
+    description: `
       Examples to make correctly requests:
       ======================================
       Boundary Box Uknown, for example Madrid is area.
@@ -61,7 +61,12 @@ export class OverpassOsmApiController {
   }
 
   @Get('/help/:language')
-  getHelp(@Param('language') selectLanguage): { type: string; filterValues: string[]; description: string; url: string; }[] {
+  getHelp(@Param('language') selectLanguage): {
+    type: string;
+    filterValues: string[];
+    description: string;
+    url: string;
+  }[] {
     return FEATURES.map((feature) => {
       return {
         type: feature.key,
@@ -73,7 +78,9 @@ export class OverpassOsmApiController {
           ...(feature.value5 !== '' ? [feature.value5] : []),
         ],
         description:
-        selectLanguage === 'es' ? feature.description_es : feature.description_en,
+          selectLanguage === 'es'
+            ? feature.description_es
+            : feature.description_en,
         url: feature.info,
       };
     });
