@@ -11,7 +11,7 @@ export const createQueryInfo = (queryParams: {
         ¡¡¡¡ NEED PASS BOUNDARY BOX LIMITS IF YOU WANT USE QUERY WITH BOUNDARIES BOX !!!!
         ==============================================================================
         Pass value with next format: 
-        <latitude_north_east>,<longitude_north_east>,<latitude_south_west>,<longitude_south_west>
+        <latitude_south_west>,<longitude_south_west>,<latitude_north_east>,<longitude_north_east>
 
         For Example:
         43.16540434728322,-2.4239873886108403,43.18261784109349,-2.401371002197266
