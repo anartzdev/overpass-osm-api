@@ -9,9 +9,5 @@
     "email": "mugan86@gmail.com",
     "url": "https://mugan86.medium.com/"
   },
-  "license": "MIT", 
-  "peerDependencies": {
-    "@nestjs/common": "^9.0.0",
-    "@nestjs/core": "^9.0.0"
-  }
+  "license": "MIT"
 }
